@@ -1,6 +1,16 @@
-import React from 'react';
-
+import React, { useContext } from 'react';
+import SearchIcon from '@material-ui/icons/Search';
+import { Link } from 'react-router-dom';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import { userContext } from '../../../App';
+import { Button } from '@material-ui/core';
 const Navbar = () => {
+    const [user, setUser] = useContext(userContext);
+    const handleSearchSHow = () => {
+        const newInfo = {...user};
+        newInfo.SearchClick = true;
+        setUser(newInfo);
+    }
     return (<div style={{borderBottom:'1px solid lightgray'}}>
         <nav class="navbar navbar-expand-lg navbar-light  pr-5 pl-5 container">
             <a class="navbar-brand" href="#"><h3 style={{fontFamily: "'Anton', sans-serif"}}>Angels&Demons</h3></a>
@@ -16,15 +26,22 @@ const Navbar = () => {
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <form class="form-inline my-2 my-lg-0">
-                    <input
-                        class="form-control mr-sm-2"
-                        type="search"
-                        placeholder="Search"
-                        aria-label="Search"/>
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                    </form>
-                <ul style={{position:'relative', top:'10px'}} class="navbar-nav">
+            
+                <ul style={{position:'relative', top:'10px'}} class="navbar-nav ml-5">
+                <li class="nav-item">
+              <form action="">
+             {
+                user.SearchClick && <input type="text" name='search' className="form-control mb-2" placeholder='search your products'/>
+             } 
+              <Button onClick={handleSearchSHow} className='btn'>
+              <SearchIcon/>
+            </Button>
+            
+              </form>
+              
+                    
+                
+            </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#"><h6 className='text-dark'>Home</h6>
                             
@@ -56,7 +73,17 @@ const Navbar = () => {
                         <a class="nav-link" href="#"><h6 className='text-dark'>Contract Us</h6></a>
                     </li>
                 </ul>
-               
+                    <ul style={{position:'relative', top:'0px'}} className="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <Link><small>Login</small></Link>
+                        </li>
+                        <li class="nav-item ml-2">
+                            <small>Cart/$0.00</small>
+                        </li>
+                        <li class="nav-item ml-2">
+                            <ShoppingCartIcon/> <small>0</small>
+                        </li>
+                    </ul>
                 </div>
             </nav>
         </div>

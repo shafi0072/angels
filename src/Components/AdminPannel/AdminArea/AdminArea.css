@@ -1,0 +1,4 @@
+.backingSideBar{
+    background-image: linear-gradient( to left,rgb(7, 107, 102), rgb(15, 255, 215));
+    height: 100vh;
+}
